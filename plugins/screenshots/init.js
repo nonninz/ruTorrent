@@ -255,10 +255,17 @@ plugin.onLangLoaded = function() {
 							$("<div>").addClass("col-12 col-md-6").append(
 								$("<input>").attr({type:"text", id:"exfrmwidth"}).prop("disabled", true),
 							),
+							$("<div>").addClass("col-12 col-md-6").append(
+								$("<input>").attr({type:"checkbox", id:"exusefrminterval", onchange:"linked(this, 0, ['exfrminterval']);"}),
+								$("<label>").attr({for:"exfrminterval", id:"lbl_exfrminterval"}).addClass("disabled").text(theUILang.exBetween + ", " + theUILang.time_s),
+							),
+							$("<div>").addClass("col-12 col-md-6").append(
+								$("<input>").attr({type:"text", id:"exfrminterval"}).prop("disabled", true),
+							),
 							...[
 								["exfrmcount", theUILang.exFramesCount],
 								["exfrmoffs", theUILang.exStartOffset + ", " + theUILang.time_s],
-								["exfrminterval", theUILang.exBetween + ", " + theUILang.time_s],
+								//["exfrminterval", theUILang.exBetween + ", " + theUILang.time_s],
 								["explayinterval", theUILang.exPlayInterval + ", " + theUILang.time_s],
 							].flatMap(([id, text]) => [
 								$("<div>").addClass("col-12 col-md-6").append(

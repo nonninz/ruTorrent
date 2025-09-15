@@ -30,6 +30,23 @@ if(isset($_REQUEST['cmd']))
 					}
 					if($filename!=='')
 					{
+						$interval = 0;
+						if($st->data['exusefrminterval'])
+						{
+							$interval = $st->data['exfrminterval'];
+						}
+						{
+							$cmd = Utility::getExternal("ffprobe").' -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 '.escapeshellarg($filename);
+							$output = array();
+							$return = 0;
+							$duration = 0;
+							exec($cmd, $output, $return);
+							if($return === 0 && !empty($output))
+							{
+								$duration = intval(floatval($output[0]));
+							}
+							$interval = intval($duration / $st->data['exfrmcount']);
+						}
 						$commands = array();
 						$offs = $st->data['exfrmoffs'];
 						$useWidth = $st->data['exusewidth'];
@@ -48,7 +65,7 @@ if(isset($_REQUEST['cmd']))
 							$commands[] = '{';
 							$commands[] = '>'.$i;
 							$commands[] = '}';
-							$offs += $st->data['exfrminterval'];
+							$offs += $interval;
 						}
 						$commands[] = 'chmod a+r "${dir}"/frame*.*';
 					}
