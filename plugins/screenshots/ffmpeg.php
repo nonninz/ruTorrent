@@ -11,6 +11,7 @@ class ffmpegSettings
 		'exfrmwidth'=>320,
 		'exfrmcount'=>3,
 		'exfrmoffs'=>3,
+		'exusefrminterval'=>0,
 		'exfrminterval'=>5,
 		'explayinterval'=>3,
 		'exformat'=>0,
@@ -25,6 +26,8 @@ class ffmpegSettings
 				$rt->data['exusewidth']=0;
 			if(!array_key_exists('exformat',$rt->data))
 				$rt->data['exformat']=0;
+			if(!array_key_exists('exusefrminterval',$rt->data))
+				$rt->data['exusefrminterval']=0;
 		}
 		return($rt);
 	}
